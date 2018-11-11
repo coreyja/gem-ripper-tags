@@ -4,7 +4,7 @@ require 'ripper-tags'
 class Gem::Commands::RipperTagsCommand < Gem::Command
   def initialize
     super 'ripper_tags', 'Generate ctags for gems with Ruby/Ripper parser'
-    
+
     add_option("--emacs", "Generate Emacs TAGS instead Vim tags") do |value, options|
       options[:emacs] = true
     end
@@ -53,6 +53,7 @@ class Gem::Commands::RipperTagsCommand < Gem::Command
         riopt.format = format
         riopt.recursive = true
         riopt.force = true
+        riopt.extra_flags = ['q'].to_set
         RipperTags.run riopt
       end
 
